@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "minecraft:scute"
+    },
+    "d": {
+      "item": "minecraft:pointed_dripstone"
+    },
+    "p": {
+      "item": "rinova:pinkylite_crystal_block"
+    },
+    "s": {
+      "item": "minecraft:slime_ball"
+    }
+  },
+  "pattern": [
+    "scs",
+    "dpd",
+    "scs"
+  ],
+  "result": {
+    "item": "rinova:spring_trap"
+  },
+  "show_notification": true
+}
