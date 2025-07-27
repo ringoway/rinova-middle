@@ -15,28 +15,27 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-public class AddItemModifier extends LootModifier {
-
-    // Кодек для сериализации/десериализации
-    public static final Supplier<Codec<AddItemModifier>> CODEC = Suppliers.memoize(()
+public class ReplaceItemModifier extends LootModifier {
+    public static final Supplier<Codec<ReplaceItemModifier>> CODEC = Suppliers.memoize(()
             -> RecordCodecBuilder.create(inst -> codecStart(inst)
             .and(ForgeRegistries.ITEMS.getCodec()
                     .fieldOf("item")
                     .forGetter(m -> m.item))
-            .apply(inst, AddItemModifier::new)));
+            .apply(inst, ReplaceItemModifier::new)));
 
-    private final Item item; // Предмет для добавления
+    private final Item item;
 
-    public AddItemModifier(LootItemCondition[] conditionsIn, Item item) {
-        super(conditionsIn);
+    public ReplaceItemModifier(LootItemCondition[] conditions, Item item) {
+        super(conditions);
         this.item = item;
     }
 
     @Override
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
+        // Очищаем весь существующий лут
+        generatedLoot.clear();
         // Добавляем наш предмет
         generatedLoot.add(new ItemStack(this.item));
-
         return generatedLoot;
     }
 
