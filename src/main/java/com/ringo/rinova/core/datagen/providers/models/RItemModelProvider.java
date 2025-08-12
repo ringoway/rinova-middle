@@ -18,6 +18,7 @@ public class RItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         basicItem(RItems.PINKYLITE_CRYSTAL.get());
+        basicItem(RItems.PINKYLITE_CRYSTAL_FRAGMENT.get());
         basicItem(RItems.VULTAN_RODS.get());
         basicItem(RItems.CRYSTAL_GRACE.get());
 
