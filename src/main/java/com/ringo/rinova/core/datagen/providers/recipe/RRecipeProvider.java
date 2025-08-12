@@ -7,6 +7,7 @@ import com.ringo.rinova.core.registry.RItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -78,8 +79,18 @@ public class RRecipeProvider extends RecipeProvider {
                 .save(writer, ResourceLocation.fromNamespaceAndPath(
                         RinovaMod.MOD_ID, "crafting/" + getItemName(RBlocks.SPRING_TRAP.get())));
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, RItems.PINKYLITE_CARROT.get(), 1)
+                .pattern("ppp")
+                .pattern("pcp")
+                .pattern("ppp")
+                .define('p', RItems.PINKYLITE_CRYSTAL_FRAGMENT.get())
+                .define('c', Items.GOLDEN_CARROT)
+                .unlockedBy(getHasName(RItems.PINKYLITE_CRYSTAL_FRAGMENT.get()), has(RItems.PINKYLITE_CRYSTAL_FRAGMENT.get()))
+                .save(writer, ResourceLocation.fromNamespaceAndPath(
+                        RinovaMod.MOD_ID, "crafting/" + getItemName(RItems.PINKYLITE_CARROT.get())));
+
         SimpleCookingRecipeBuilder.smelting( //билдер для создания плавки
-                Ingredient.of(RBlocks.PINKYLITE_ORE.get(), RBlocks.DEEPSLATE_PINKYLITE_ORE.get()), //входящие ингредиенты
+                        Ingredient.of(RBlocks.PINKYLITE_ORE.get(), RBlocks.DEEPSLATE_PINKYLITE_ORE.get()), //входящие ингредиенты
                         RecipeCategory.MISC,
                         RItems.PINKYLITE_CRYSTAL.get(),
                         2.5f, 200) // Опыт и время
@@ -87,7 +98,45 @@ public class RRecipeProvider extends RecipeProvider {
                 .save(writer, ResourceLocation.fromNamespaceAndPath(
                         RinovaMod.MOD_ID, "smelting/" + getItemName(RItems.PINKYLITE_CRYSTAL.get())));
 
+        foodCooking(writer, RItems.RAW_GOAT_MEAT.get(), RItems.COOKED_GOAT_MEAT.get()); // Супер удобно!
+
         compat(writer, RItems.PINKYLITE_CRYSTAL.get(), RBlocks.PINKYLITE_CRYSTAL_BLOCK.get());
+        compat(writer, RItems.PINKYLITE_CRYSTAL_FRAGMENT.get(), RItems.PINKYLITE_CRYSTAL.get());
+
+        basicTools(writer, RItems.VULTAN_RODS.get(), RItems.PINKYLITE_CRYSTAL.get(),
+                RItems.PINKYLITE_SWORD.get(),
+                RItems.PINKYLITE_PICKAXE.get(),
+                RItems.PINKYLITE_AXE.get(),
+                RItems.PINKYLITE_SHOVEL.get(),
+                RItems.PINKYLITE_HOE.get());
+    }
+    protected static void foodCooking(Consumer<FinishedRecipe> writer, Item input, Item result) {
+        SimpleCookingRecipeBuilder.smelting(
+                        Ingredient.of(input),
+                        RecipeCategory.FOOD,
+                        result,
+                        0.35F, 200)
+                .unlockedBy("has_" + getItemName(input), has(input))
+                .save(writer, ResourceLocation.fromNamespaceAndPath(
+                        RinovaMod.MOD_ID, "smelting/" + getItemName(result)));
+
+        SimpleCookingRecipeBuilder.smoking(
+                        Ingredient.of(input),
+                        RecipeCategory.FOOD,
+                        result,
+                        0.35F, 100)
+                .unlockedBy("has_" + getItemName(input), has(input))
+                .save(writer, ResourceLocation.fromNamespaceAndPath(
+                        RinovaMod.MOD_ID, "smoking/" + getItemName(result)));
+
+        SimpleCookingRecipeBuilder.campfireCooking(
+                        Ingredient.of(input),
+                        RecipeCategory.FOOD,
+                        result,
+                        0.35F, 600)
+                .unlockedBy("has_" + getItemName(input), has(input))
+                .save(writer, ResourceLocation.fromNamespaceAndPath(
+                        RinovaMod.MOD_ID, "campfire_cooking/" + getItemName(result)));
     }
 
     protected static void compat(Consumer<FinishedRecipe> consumer, ItemLike input, ItemLike result) {
@@ -107,5 +156,58 @@ public class RRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(result), has(result))
                 .save(consumer, ResourceLocation.fromNamespaceAndPath(
                         RinovaMod.MOD_ID, "crafting/uncompact/" + getItemName(result) + "_from_" + getItemName(input)));
+    }
+
+    protected static void basicTools(Consumer<FinishedRecipe> consumer, ItemLike sticks, ItemLike baseMaterial,
+                                     ItemLike sword, ItemLike pickaxe, ItemLike axe, ItemLike shovel, ItemLike hoe) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, sword, 1)
+                .pattern("p")
+                .pattern("p")
+                .pattern("v")
+                .define('v', sticks)
+                .define('p', baseMaterial)
+                .unlockedBy(getHasName(baseMaterial), has(baseMaterial))
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(
+                        RinovaMod.MOD_ID, "crafting/" + getItemName(sword)));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, pickaxe, 1)
+                .pattern("ppp")
+                .pattern(" v ")
+                .pattern(" v ")
+                .define('v', sticks)
+                .define('p', baseMaterial)
+                .unlockedBy(getHasName(baseMaterial), has(baseMaterial))
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(
+                        RinovaMod.MOD_ID, "crafting/" + getItemName(pickaxe)));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, axe, 1)
+                .pattern("pp")
+                .pattern("vp")
+                .pattern("v ")
+                .define('v', sticks)
+                .define('p', baseMaterial)
+                .unlockedBy(getHasName(baseMaterial), has(baseMaterial))
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(
+                        RinovaMod.MOD_ID, "crafting/" + getItemName(axe)));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, shovel, 1)
+                .pattern("p")
+                .pattern("v")
+                .pattern("v")
+                .define('v', sticks)
+                .define('p', baseMaterial)
+                .unlockedBy(getHasName(baseMaterial), has(baseMaterial))
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(
+                        RinovaMod.MOD_ID, "crafting/" + getItemName(shovel)));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, hoe, 1)
+                .pattern("pp")
+                .pattern("v ")
+                .pattern("v ")
+                .define('v', sticks)
+                .define('p', baseMaterial)
+                .unlockedBy(getHasName(baseMaterial), has(baseMaterial))
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(
+                        RinovaMod.MOD_ID, "crafting/" + getItemName(hoe)));
     }
 }
