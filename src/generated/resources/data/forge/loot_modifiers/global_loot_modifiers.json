@@ -1,10 +1,8 @@
 {
   "entries": [
-    "rinova:remove_bones_from_wither_skeleton",
-    "rinova:vultan_rods_from_nether_bridge",
-    "rinova:replace_sculk_from_warden",
     "rinova:wither_heart_from_wither",
-    "rinova:hell_brush_from_bastion"
+    "rinova:hell_brush_from_bastion",
+    "rinova:raw_goat_meat_from_goat"
   ],
   "replace": false
 }
