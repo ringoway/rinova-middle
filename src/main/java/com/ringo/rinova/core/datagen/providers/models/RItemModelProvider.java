@@ -35,6 +35,7 @@ public class RItemModelProvider extends ItemModelProvider {
         handheldItem(RItems.PINKYLITE_AXE);
         handheldItem(RItems.PINKYLITE_SHOVEL);
         handheldItem(RItems.PINKYLITE_HOE);
+        handheldItem(RItems.PINKYLITE_HAMMER);
     }
 
     private ItemModelBuilder handheldItem(RegistryObject<Item> item) {

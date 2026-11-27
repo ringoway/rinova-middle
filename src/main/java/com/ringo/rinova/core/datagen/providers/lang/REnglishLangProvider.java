@@ -46,5 +46,6 @@ public class REnglishLangProvider extends RLangProvider {
         addItem(RItems.PINKYLITE_AXE, "Pinkylite axe");
         addItem(RItems.PINKYLITE_SHOVEL, "Pinkylite shovel");
         addItem(RItems.PINKYLITE_HOE, "Pinkylite how");
+        addItem(RItems.PINKYLITE_HAMMER, "Pinkylite hammer");
     }
 }

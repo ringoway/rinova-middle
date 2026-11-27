@@ -109,6 +109,17 @@ public class RRecipeProvider extends RecipeProvider {
                 RItems.PINKYLITE_AXE.get(),
                 RItems.PINKYLITE_SHOVEL.get(),
                 RItems.PINKYLITE_HOE.get());
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, RItems.PINKYLITE_HAMMER.get(), 1)
+                .pattern("ppp")
+                .pattern("ppp")
+                .pattern(" v ")
+                .define('p', RBlocks.PINKYLITE_CRYSTAL_BLOCK.get())
+                .define('v', RItems.VULTAN_RODS.get())
+                .unlockedBy(getHasName(RBlocks.PINKYLITE_CRYSTAL_BLOCK.get()), has(RBlocks.PINKYLITE_CRYSTAL_BLOCK.get()))
+                .save(writer, ResourceLocation.fromNamespaceAndPath(
+                        RinovaMod.MOD_ID, "crafting/" + getItemName(RItems.PINKYLITE_HAMMER.get())));
+
     }
     protected static void foodCooking(Consumer<FinishedRecipe> writer, Item input, Item result) {
         SimpleCookingRecipeBuilder.smelting(

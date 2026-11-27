@@ -2,10 +2,7 @@ package com.ringo.rinova.core.registry;
 
 import com.ringo.rinova.RinovaMod;
 import com.ringo.rinova.common.food.RFoods;
-import com.ringo.rinova.common.item.CrystalGraceItem;
-import com.ringo.rinova.common.item.FuelItem;
-import com.ringo.rinova.common.item.HellBrushItem;
-import com.ringo.rinova.common.item.PinkiliteStaffItem;
+import com.ringo.rinova.common.item.*;
 import com.ringo.rinova.core.registry.other.RToolTiers;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -50,6 +47,9 @@ public class RItems {
             () -> new ShovelItem(RToolTiers.PINKYLITE_CRYSTAL, 1.5F, -3.0F, new Item.Properties()));
     public static final RegistryObject<Item> PINKYLITE_HOE = registerItem("pinkylite_hoe",
             () -> new HoeItem(RToolTiers.PINKYLITE_CRYSTAL, -3, 0.0F, new Item.Properties()));
+    public static final RegistryObject<Item> PINKYLITE_HAMMER = registerItem("pinkylite_hammer",
+            () -> new HammerItem(RToolTiers.PINKYLITE_CRYSTAL, 6, -3.2F,
+                    new Item.Properties().durability(5361)));
 
     private static <T extends Item> RegistryObject<T> registerItem(String id, Supplier<T> item) {
         return ITEMS.register(id, item);

@@ -46,5 +46,6 @@ public class RRussianLangProvider extends RLangProvider {
         addItem(RItems.PINKYLITE_AXE, "Пинкилитовый топор");
         addItem(RItems.PINKYLITE_SHOVEL, "Пинкилитовая лопата");
         addItem(RItems.PINKYLITE_HOE, "Пинкилитовая мотыга");
+        addItem(RItems.PINKYLITE_HAMMER, "Пинкилитовый молот");
     }
 }

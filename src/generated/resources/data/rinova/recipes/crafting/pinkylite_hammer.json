@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "p": {
+      "item": "rinova:pinkylite_crystal_block"
+    },
+    "v": {
+      "item": "rinova:vultan_rods"
+    }
+  },
+  "pattern": [
+    "ppp",
+    "ppp",
+    " v "
+  ],
+  "result": {
+    "item": "rinova:pinkylite_hammer"
+  },
+  "show_notification": true
+}
